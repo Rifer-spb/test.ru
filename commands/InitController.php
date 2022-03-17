@@ -7,8 +7,10 @@
 
 namespace app\commands;
 
-use yii\console\Controller;
+use yii\base\Exception;
 use yii\console\ExitCode;
+use yii\console\Controller;
+use yii\helpers\FileHelper;
 
 /**
  * This command echoes the first argument that you have entered.
@@ -18,17 +20,21 @@ use yii\console\ExitCode;
  * @author Qiang Xue <qiang.xue@gmail.com>
  * @since 2.0
  */
-class HelloController extends Controller
+class InitController extends Controller
 {
     /**
-     * This command echoes what you have entered as the message.
-     * @param string $message the message to be echoed.
-     * @return int Exit code
+     * @return int
+     * @throws Exception
      */
-    public function actionIndex($message = 'hello world')
+    public function actionIndex()
     {
-        echo $message . "\n";
-
+        $dbFolderPath = __DIR__.'/../db';
+        echo "Creating DB folder with 0777...\n";
+        if(FileHelper::createDirectory($dbFolderPath,0777)===false) {
+            echo "ERROR: DB folder is not created!\n";
+            exit();
+        }
+        echo "DB folder was created successfully!\n";
         return ExitCode::OK;
     }
 }
