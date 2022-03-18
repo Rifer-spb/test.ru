@@ -1,15 +1,15 @@
 <?php
 
-namespace app\modules\admin\models\Cat;
+namespace app\models\Forms\Module\Admin\Product;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\Entities\Cat\Cat;
+use app\models\Entities\Product\Product;
 
 /**
- * ProductCatSearch represents the model behind the search form of `app\models\Entities\Cat\Cat`.
+ * ProductSearch represents the model behind the search form of `app\models\Entities\Product\Product`.
  */
-class CatSearch extends Cat
+class ProductSearch extends Product
 {
     /**
      * {@inheritdoc}
@@ -17,8 +17,8 @@ class CatSearch extends Cat
     public function rules()
     {
         return [
-            [['id'], 'integer'],
-            [['name', 'color'], 'safe'],
+            [['id', 'price', 'publish'], 'integer'],
+            [['name'], 'safe'],
         ];
     }
 
@@ -40,7 +40,7 @@ class CatSearch extends Cat
      */
     public function search($params)
     {
-        $query = Cat::find();
+        $query = Product::find();
 
         // add conditions that should always apply here
 
@@ -59,10 +59,11 @@ class CatSearch extends Cat
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
+            'price' => $this->price,
+            'publish' => $this->publish,
         ]);
 
-        $query->andFilterWhere(['like', 'name', $this->name])
-            ->andFilterWhere(['like', 'color', $this->color]);
+        $query->andFilterWhere(['like', 'name', $this->name]);
 
         return $dataProvider;
     }

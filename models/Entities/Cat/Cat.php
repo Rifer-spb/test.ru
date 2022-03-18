@@ -12,6 +12,17 @@ class Cat extends \yii\db\ActiveRecord
     }
 
     /**
+     * @return array
+     */
+    public function attributeLabels() {
+        return [
+            'id' => 'ID',
+            'name' => 'Имя',
+            'color' => 'Цвет',
+        ];
+    }
+
+    /**
      * @param string $name
      * @param string $color
      * @return Cat

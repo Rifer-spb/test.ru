@@ -5,23 +5,29 @@ namespace app\modules\admin\controllers;
 use yii\web\Response;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
-use app\models\Entities\Cat\Cat;
-use yii\db\StaleObjectException;
 use yii\web\NotFoundHttpException;
-use app\models\Forms\Module\Admin\Cat\CatSearch;
-use app\models\Forms\Module\Admin\Cat\CreateForm;
-use app\models\Forms\Module\Admin\Cat\UpdateForm;
-use app\models\UseCases\Module\Admin\Cat\CatService;
+use app\models\Entities\Product\Product;
+use app\models\ReadModels\Cat\CatReadRepository;
+use app\models\Forms\Module\Admin\Product\CreateForm;
+use app\models\Forms\Module\Admin\Product\ProductSearch;
+use app\models\UseCases\Module\Admin\Product\ProductService;
 
 /**
- * CatController implements the CRUD actions for Cat model.
+ * ProductController implements the CRUD actions for Product model.
  */
-class CatController extends Controller
+class ProductController extends Controller
 {
+    private $cats;
     private $service;
 
-    public function __construct($id, $module, CatService $service, $config = [])
-    {
+    public function __construct(
+        $id,
+        $module,
+        ProductService $service,
+        CatReadRepository $cats,
+        $config = []
+    ) {
+        $this->cats = $cats;
         $this->service = $service;
         parent::__construct($id, $module, $config);
     }
@@ -45,12 +51,12 @@ class CatController extends Controller
     }
 
     /**
-     * Lists all Cat models.
+     * Lists all Product models.
      *
      * @return string
      */
     public function actionIndex() {
-        $searchModel = new CatSearch();
+        $searchModel = new ProductSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
         return $this->render('index', [
             'searchModel' => $searchModel,
@@ -59,7 +65,7 @@ class CatController extends Controller
     }
 
     /**
-     * Displays a single Cat model.
+     * Displays a single Product model.
      * @param int $id ID
      * @return string
      * @throws NotFoundHttpException if the model cannot be found
@@ -75,7 +81,7 @@ class CatController extends Controller
      */
     public function actionCreate() {
         $form = new CreateForm();
-        if ($form->load($this->request->post()) and $form->validate()) {
+        if ($form->load($this->request->post()) && $form->validate()) {
             try {
                 $id = $this->service->add($form);
                 return $this->redirect(['view', 'id' => $id]);
@@ -85,51 +91,56 @@ class CatController extends Controller
         }
         return $this->render('create', [
             'model' => $form,
+            'cats' => $this->cats->findAll()
         ]);
     }
 
     /**
-     * @param $id
+     * Updates an existing Product model.
+     * If update is successful, the browser will be redirected to the 'view' page.
+     * @param int $id ID
      * @return string|Response
-     * @throws NotFoundHttpException
+     * @throws NotFoundHttpException if the model cannot be found
      */
     public function actionUpdate($id) {
-        $cat = $this->findModel($id);
-        $model = new UpdateForm();
-        if ($model->load($this->request->post()) and $model->validate()) {
-            try {
-                $this->service->edit($cat,$model);
-                return $this->redirect(['view', 'id' => $cat->id]);
-            } catch (\DomainException $e) {
-                print $e->getMessage();
-            }
+        $model = $this->findModel($id);
+
+        if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
+            return $this->redirect(['view', 'id' => $model->id]);
         }
+
         return $this->render('update', [
             'model' => $model,
-            'cat' => $cat
         ]);
     }
 
     /**
-     * @param $id
+     * Deletes an existing Product model.
+     * If deletion is successful, the browser will be redirected to the 'index' page.
+     * @param int $id ID
      * @return Response
-     * @throws NotFoundHttpException
-     * @throws StaleObjectException
+     * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionDelete($id) {
+    public function actionDelete($id)
+    {
         $this->findModel($id)->delete();
+
         return $this->redirect(['index']);
     }
 
     /**
-     * @param $id
-     * @return Cat|null
-     * @throws NotFoundHttpException
+     * Finds the Product model based on its primary key value.
+     * If the model is not found, a 404 HTTP exception will be thrown.
+     * @param int $id ID
+     * @return Product the loaded model
+     * @throws NotFoundHttpException if the model cannot be found
      */
-    protected function findModel($id) : ?Cat {
-        if (!$model = Cat::findOne($id)) {
-            throw new NotFoundHttpException('The requested page does not exist.');
+    protected function findModel($id)
+    {
+        if (($model = Product::findOne(['id' => $id])) !== null) {
+            return $model;
         }
-        return $model;
+
+        throw new NotFoundHttpException('The requested page does not exist.');
     }
 }
