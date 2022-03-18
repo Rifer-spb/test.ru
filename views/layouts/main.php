@@ -41,8 +41,8 @@ AppAsset::register($this);
             Yii::$app->user->isGuest ? (
                 ['label' => 'Войти', 'url' => ['/site/login']]
             ) : (
-                '<li><a class="nav-link" href="/site/admin/cats/index">Категории</a></li>'.
-                '<li><a class="nav-link" href="/site/admin/products/index">Продукты</a></li>'.
+                '<li><a class="nav-link" href="/web/site/admin/product-cat/index">Категории</a></li>'.
+                '<li><a class="nav-link" href="/web/site/admin/products/index">Продукты</a></li>'.
                 '<li>'
                 . Html::beginForm(['/site/logout'], 'post', ['class' => 'form-inline'])
                 . Html::submitButton(
