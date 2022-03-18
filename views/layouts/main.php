@@ -3,12 +3,12 @@
 /** @var yii\web\View $this */
 /** @var string $content */
 
-use app\assets\AppAsset;
 use app\widgets\Alert;
-use yii\bootstrap4\Breadcrumbs;
 use yii\bootstrap4\Html;
 use yii\bootstrap4\Nav;
+use app\assets\AppAsset;
 use yii\bootstrap4\NavBar;
+use yii\bootstrap4\Breadcrumbs;
 
 AppAsset::register($this);
 ?>
@@ -41,8 +41,8 @@ AppAsset::register($this);
             Yii::$app->user->isGuest ? (
                 ['label' => 'Войти', 'url' => ['/site/login']]
             ) : (
-                '<li><a class="nav-link" href="/web/site/admin/product-cat/index">Категории</a></li>'.
-                '<li><a class="nav-link" href="/web/site/admin/products/index">Продукты</a></li>'.
+                '<li><a class="nav-link" href="/web/admin/cat/index">Категории</a></li>'.
+                '<li><a class="nav-link" href="/web/admin/product/index">Продукты</a></li>'.
                 '<li>'
                 . Html::beginForm(['/site/logout'], 'post', ['class' => 'form-inline'])
                 . Html::submitButton(
@@ -61,6 +61,7 @@ AppAsset::register($this);
 <main role="main" class="flex-shrink-0">
     <div class="container">
         <?= Breadcrumbs::widget([
+            'homeLink' => ['label' => 'Главная', 'url' => Yii::$app->homeUrl],
             'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
         ]) ?>
         <?= Alert::widget() ?>
@@ -70,7 +71,7 @@ AppAsset::register($this);
 
 <footer class="footer mt-auto py-3 text-muted">
     <div class="container">
-        <p class="float-left">&copy; My Company <?= date('Y') ?></p>
+        <p class="float-left">&copy; Testos Company <?= date('Y') ?></p>
         <p class="float-right"><?= Yii::powered() ?></p>
     </div>
 </footer>

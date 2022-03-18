@@ -5,20 +5,21 @@ namespace app\models\Entities\Product;
 use Yii;
 
 /**
- * This is the model class for table "product_cat".
+ * This is the model class for table "product".
  *
  * @property int $id
  * @property string|null $name
- * @property string|null $color
+ * @property int|null $price
+ * @property int|null $publish
  */
-class ProductCat extends \yii\db\ActiveRecord
+class Product extends \yii\db\ActiveRecord
 {
     /**
      * {@inheritdoc}
      */
     public static function tableName()
     {
-        return 'product_cat';
+        return 'product';
     }
 
     /**
@@ -27,7 +28,8 @@ class ProductCat extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name', 'color'], 'string', 'max' => 255],
+            [['price', 'publish'], 'integer'],
+            [['name'], 'string', 'max' => 255],
         ];
     }
 
@@ -38,8 +40,9 @@ class ProductCat extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'name' => 'Name',
-            'color' => 'Color',
+            'name' => 'Название',
+            'price' => 'Цена',
+            'publish' => 'Публикация',
         ];
     }
 }

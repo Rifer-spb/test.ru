@@ -1,15 +1,15 @@
 <?php
 
-namespace app\modules\admin\models;
+namespace app\modules\admin\models\Cat;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\Entities\Product\ProductCat;
+use app\models\Entities\Cat\Cat;
 
 /**
- * ProductCatSearch represents the model behind the search form of `app\models\Entities\Product\ProductCat`.
+ * ProductCatSearch represents the model behind the search form of `app\models\Entities\Cat\Cat`.
  */
-class ProductCatSearch extends ProductCat
+class CatSearch extends Cat
 {
     /**
      * {@inheritdoc}
@@ -40,7 +40,7 @@ class ProductCatSearch extends ProductCat
      */
     public function search($params)
     {
-        $query = ProductCat::find();
+        $query = Cat::find();
 
         // add conditions that should always apply here
 
