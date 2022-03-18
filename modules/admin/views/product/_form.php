@@ -35,7 +35,13 @@ use app\models\Entities\Product\Product;
     <div class="row">
         <div class="col-sm-12">
             <?= $form->field($model, 'cats')->checkboxList(
-                ArrayHelper::map($cats,'id','name')
+                ArrayHelper::map($cats,'id','name'), [
+                 'item' => function ($index, $label, $name, $checked, $value) {
+                    return "<label>
+                            <input type='checkbox' name='$name' value='$value' />$label
+                            <span></span>
+                        </label>";
+                }]
             ) ?>
         </div>
     </div>
