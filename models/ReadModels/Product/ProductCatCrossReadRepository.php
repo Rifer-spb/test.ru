@@ -17,17 +17,4 @@ class ProductCatCrossReadRepository
             ->asArray()
             ->column();
     }
-
-    /**
-     * @param int $id
-     * @return array
-     */
-    public function findCatsByProduct(int $id) : array {
-        return ProductCatCross::find()
-            ->alias('c')
-            ->joinWith('cat')
-            ->where(['product' => $id])
-            ->asArray()
-            ->all();
-    }
 }

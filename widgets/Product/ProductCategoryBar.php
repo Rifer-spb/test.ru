@@ -1,6 +1,6 @@
 <?php
 
-namespace app\widgets\Product\CategoryBar;
+namespace app\widgets\Product;
 
 use yii\base\Widget;
 use app\models\ReadModels\Cat\CatReadRepository;
@@ -26,6 +26,9 @@ class ProductCategoryBar extends Widget
         }
     }
 
+    /**
+     * @return string|null
+     */
     public function run() : ?string {
         $cats = $this->cats->findCatsByProduct($this->id);
         if(count($cats)>0) {
