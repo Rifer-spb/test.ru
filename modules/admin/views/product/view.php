@@ -3,7 +3,7 @@
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 use app\widgets\Product\ProductCategoryBar;
-use app\widgets\Product\ProductUploadImage;
+use app\widgets\Module\Admin\Product\ProductUploadImage;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Entities\Product\Product */
@@ -27,7 +27,6 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
         ]) ?>
     </p>
-
     <?= ProductCategoryBar::widget(['id' => $model->id]) ?>
     <?= DetailView::widget([
         'model' => $model,

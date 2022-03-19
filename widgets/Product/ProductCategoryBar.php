@@ -36,7 +36,7 @@ class ProductCategoryBar extends Widget
                 $width = 100/count($cats);
                 foreach ($cats as $cat) {
                     $html .='<div style="background-color:'.$cat['color'].';width:'.$width.'%">';
-                        $html .=$cat['color'];
+                        $html .=$cat['name'];
                     $html .='</div>';
                 }
             $html .="</div>";

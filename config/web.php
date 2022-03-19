@@ -11,6 +11,7 @@ $config = [
     'aliases' => [
         '@bower' => '@vendor/bower-asset',
         '@npm'   => '@vendor/npm-asset',
+        '@product' => 'upload/product',
     ],
     'components' => [
         'request' => [
@@ -48,6 +49,7 @@ $config = [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
+                'admin/widgets/product/<controller>/<action>' => 'admin/widgets/product/<controller>/<action>'
             ],
         ],
     ],
