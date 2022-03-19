@@ -20,6 +20,7 @@ class ProductCategoryBar extends Widget
 
     public function init()
     {
+        ProductCategoryBarAssets::register( $this->getView() );
         parent::init();
         if(!$this->id) {
             throw new \InvalidArgumentException('ID param not found.');

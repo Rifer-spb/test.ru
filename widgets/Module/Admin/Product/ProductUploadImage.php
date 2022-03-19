@@ -19,6 +19,7 @@ class ProductUploadImage extends Widget
 
     public function init()
     {
+        ProductUploadImageAssets::register( $this->getView() );
         parent::init();
         if(!$this->id) {
             throw new \InvalidArgumentException('ID param not found.');
