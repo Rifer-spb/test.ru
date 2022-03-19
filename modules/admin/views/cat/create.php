@@ -3,7 +3,7 @@
 use yii\helpers\Html;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\Entities\Cat\Cat */
+/* @var $model app\models\Forms\Module\Admin\Cat\CreateForm */
 
 $this->title = 'Создание новой категории';
 $this->params['breadcrumbs'][] = ['label' => 'Категории', 'url' => ['index']];

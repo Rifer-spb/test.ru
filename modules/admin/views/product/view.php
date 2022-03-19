@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
+use app\widgets\Product\CategoryBar\ProductCategoryBar;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Entities\Product\Product */
@@ -26,6 +27,7 @@ $this->params['breadcrumbs'][] = $this->title;
         ]) ?>
     </p>
 
+    <?= ProductCategoryBar::widget(['id' => $model->id]) ?>
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [

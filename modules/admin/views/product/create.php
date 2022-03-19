@@ -2,9 +2,9 @@
 
 use yii\helpers\Html;
 
-/* @var $this yii\web\View */
-/* @var $model app\models\Entities\Product\Product */
 /* @var $cats array */
+/* @var $this yii\web\View */
+/* @var $model app\models\Forms\Module\Admin\Product\CreateForm */
 
 $this->title = 'Создание';
 $this->params['breadcrumbs'][] = ['label' => 'Продукты', 'url' => ['index']];

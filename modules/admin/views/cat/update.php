@@ -3,7 +3,8 @@
 use yii\helpers\Html;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\Entities\Cat\Cat */
+/* @var $cat app\models\Entities\Cat\Cat */
+/* @var $model app\models\Forms\Module\Admin\Cat\UpdateForm */
 
 $model->id = $cat->id;
 $model->name = $cat->name;

@@ -2,6 +2,13 @@
 
 namespace app\models\Entities\Cat;
 
+/**
+ * This is the model class for table "cat".
+ *
+ * @property int $id
+ * @property string|null $name
+ * @property string|null $color
+ */
 class Cat extends \yii\db\ActiveRecord
 {
     /**

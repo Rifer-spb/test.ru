@@ -9,8 +9,10 @@ use yii\web\NotFoundHttpException;
 use app\models\Entities\Product\Product;
 use app\models\ReadModels\Cat\CatReadRepository;
 use app\models\Forms\Module\Admin\Product\CreateForm;
+use app\models\Forms\Module\Admin\Product\UpdateForm;
 use app\models\Forms\Module\Admin\Product\ProductSearch;
 use app\models\UseCases\Module\Admin\Product\ProductService;
+use app\models\ReadModels\Product\ProductCatCrossReadRepository;
 
 /**
  * ProductController implements the CRUD actions for Product model.
@@ -19,24 +21,26 @@ class ProductController extends Controller
 {
     private $cats;
     private $service;
+    private $catCross;
 
     public function __construct(
         $id,
         $module,
         ProductService $service,
         CatReadRepository $cats,
+        ProductCatCrossReadRepository $catCross,
         $config = []
     ) {
         $this->cats = $cats;
         $this->service = $service;
+        $this->catCross = $catCross;
         parent::__construct($id, $module, $config);
     }
 
     /**
      * @inheritDoc
      */
-    public function behaviors()
-    {
+    public function behaviors() : array {
         return array_merge(
             parent::behaviors(),
             [
@@ -96,30 +100,36 @@ class ProductController extends Controller
     }
 
     /**
-     * Updates an existing Product model.
-     * If update is successful, the browser will be redirected to the 'view' page.
-     * @param int $id ID
+     * @param $id
      * @return string|Response
-     * @throws NotFoundHttpException if the model cannot be found
+     * @throws NotFoundHttpException
      */
     public function actionUpdate($id) {
-        $model = $this->findModel($id);
-
-        if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        $product = $this->findModel($id);
+        $form = new UpdateForm();
+        if ($form->load($this->request->post()) && $form->validate()) {
+            try {
+                $this->service->edit($product, $form);
+                return $this->redirect(['view', 'id' => $product->id]);
+            } catch (\DomainException $e) {
+                print $e->getMessage();
+            }
         }
-
         return $this->render('update', [
-            'model' => $model,
+            'model' => $form,
+            'product' => $product,
+            'cats' => $this->cats->findAll(),
+            'cats_checked' => $this->catCross->findCatIDsByProduct(
+                $product->id
+            )
         ]);
     }
 
     /**
-     * Deletes an existing Product model.
-     * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param int $id ID
+     * @param $id
      * @return Response
-     * @throws NotFoundHttpException if the model cannot be found
+     * @throws NotFoundHttpException
+     * @throws \yii\db\StaleObjectException
      */
     public function actionDelete($id)
     {

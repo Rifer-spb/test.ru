@@ -5,8 +5,9 @@ namespace app\models\Forms\Module\Admin\Product;
 use yii\base\Model;
 use app\models\Entities\Cat\Cat;
 
-class CreateForm extends Model
+class UpdateForm extends Model
 {
+    public $id;
     public $cats;
     public $name;
     public $desc;
@@ -19,7 +20,7 @@ class CreateForm extends Model
     public function rules() : array {
         return [
             [['name','price','cats'],'required','message' => 'Поле обязательно к заполнению'],
-            [['price'], 'integer'],
+            [['price','id'], 'integer'],
             [['publish'], 'integer', 'max' => 1],
             [['name'], 'string', 'max' => 255],
             ['desc','string'],
