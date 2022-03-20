@@ -8,15 +8,20 @@
 
 1:
 ~~~
-composer install
+git clone https://github.com/Rifer-spb/test.ru.git
 ~~~
 
 2:
 ~~~
-yii init
+composer install
 ~~~
 
 3:
+~~~
+yii init
+~~~
+
+4:
 ~~~
 yii migrate/up
 ~~~
