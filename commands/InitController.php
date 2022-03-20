@@ -35,20 +35,6 @@ class InitController extends Controller
             exit();
         }
         echo "DB folder was created successfully!\n";
-        $uploadFolderPath = __DIR__.'/../upload';
-        echo "Creating Upload folder with 0777...\n";
-        if(FileHelper::createDirectory($uploadFolderPath,0777)===false) {
-            echo "ERROR: Upload folder is not created!\n";
-            exit();
-        }
-        echo "Upload folder was created successfully!\n";
-        $productFolderPath = __DIR__.'/../upload/product';
-        echo "Creating Product folder with 0777...\n";
-        if(FileHelper::createDirectory($productFolderPath,0777)===false) {
-            echo "ERROR: Product folder is not created!\n";
-            exit();
-        }
-        echo "Product folder was created successfully!\n";
         return ExitCode::OK;
     }
 }
