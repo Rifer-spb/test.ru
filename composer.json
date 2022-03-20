@@ -22,7 +22,7 @@
         "mihaildev/yii2-ckeditor": "*",
         "yiisoft/yii2-imagine": "*",
         "powerkernel/yii2-photoswipe": "*",
-      "ext-sqlite3": "*"
+        "ext-sqlite3": "*"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.1.0",
