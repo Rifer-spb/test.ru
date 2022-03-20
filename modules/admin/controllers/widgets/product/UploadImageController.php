@@ -2,9 +2,12 @@
 
 namespace app\modules\admin\controllers\widgets\product;
 
-use yii\rest\Controller;
+use Yii;
+use yii\web\Response;
+use yii\web\Controller;
 use yii\web\UploadedFile;
 use yii\widgets\ActiveForm;
+use yii\filters\AccessControl;
 use yii\web\NotFoundHttpException;
 use app\models\Helpers\ProductHelper;
 use app\models\Entities\Product\ProductImage;
@@ -29,11 +32,28 @@ class UploadImageController extends Controller
         parent::__construct($id, $module, $config);
     }
 
+    public function behaviors() : array {
+        return [
+            'access' => [
+                'class' => AccessControl::class,
+                'only' => ['upload','delete','set-default'],
+                'rules' => [
+                    [
+                        'roles' => ['@'],
+                        'allow' => true,
+                        'actions' => ['upload','delete','set-default']
+                    ],
+                ],
+            ],
+        ];
+    }
+
     /**
-     * @return array|bool|string
+     * @return array|string
      * @throws \Exception
      */
     public function actionUpload() {
+        Yii::$app->response->format = Response::FORMAT_JSON;
         $form = new UploadForm();
         $form->file = UploadedFile::getInstance($form, 'file');
         if($form->load($this->request->post())) {
@@ -61,6 +81,7 @@ class UploadImageController extends Controller
      * @throws \yii\db\StaleObjectException
      */
     public function actionDelete($id) {
+        Yii::$app->response->format = Response::FORMAT_JSON;
         $image = $this->findModel($id);
         try {
             $this->service->delete($image);
@@ -78,6 +99,7 @@ class UploadImageController extends Controller
      * @throws NotFoundHttpException
      */
     public function actionSetDefault($id) {
+        Yii::$app->response->format = Response::FORMAT_JSON;
         $image = $this->findModel($id);
         try {
             $this->service->setDefault($image);

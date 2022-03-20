@@ -5,6 +5,7 @@ namespace app\modules\admin\controllers;
 use yii\web\Response;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
+use yii\filters\AccessControl;
 use yii\web\NotFoundHttpException;
 use app\models\Entities\Product\Product;
 use app\models\ReadModels\Cat\CatReadRepository;
@@ -44,6 +45,17 @@ class ProductController extends Controller
         return array_merge(
             parent::behaviors(),
             [
+                'access' => [
+                    'class' => AccessControl::class,
+                    'only' => ['index','view','create','update','delete'],
+                    'rules' => [
+                        [
+                            'allow' => true,
+                            'actions' => ['index','view','create','update','delete'],
+                            'roles' => ['@'],
+                        ],
+                    ],
+                ],
                 'verbs' => [
                     'class' => VerbFilter::class,
                     'actions' => [

@@ -3,6 +3,7 @@
 namespace app\modules\admin\controllers;
 
 use yii\web\Controller;
+use yii\filters\AccessControl;
 
 /**
  * Default controller for the `admin` module
@@ -10,11 +11,29 @@ use yii\web\Controller;
 class DefaultController extends Controller
 {
     /**
+     * @return array[]
+     */
+    public function behaviors() {
+        return [
+            'access' => [
+                'class' => AccessControl::class,
+                'only' => ['index'],
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'actions' => ['index'],
+                        'roles' => ['@'],
+                    ],
+                ],
+            ],
+        ];
+    }
+
+    /**
      * Renders the index view for the module
      * @return string
      */
-    public function actionIndex()
-    {
+    public function actionIndex() {
         return $this->render('index');
     }
 }

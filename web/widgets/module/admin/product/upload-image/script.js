@@ -20,6 +20,7 @@ document.querySelector('.product-upload-image input[type=file]').addEventListene
     const formData = new FormData();
     formData.append('UploadForm[id]',id);
     formData.append('UploadForm[file]',files[0]);
+    formData.append(yii.getCsrfParam(),yii.getCsrfToken());
     const xhr = new XMLHttpRequest();
     xhr.upload.onprogress = function(evt) {
         if (evt.lengthComputable) {

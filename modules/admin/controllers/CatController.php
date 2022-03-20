@@ -5,6 +5,7 @@ namespace app\modules\admin\controllers;
 use yii\web\Response;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
+use yii\filters\AccessControl;
 use app\models\Entities\Cat\Cat;
 use yii\db\StaleObjectException;
 use yii\web\NotFoundHttpException;
@@ -29,11 +30,21 @@ class CatController extends Controller
     /**
      * @inheritDoc
      */
-    public function behaviors()
-    {
+    public function behaviors() {
         return array_merge(
             parent::behaviors(),
             [
+                'access' => [
+                    'class' => AccessControl::class,
+                    'only' => ['index','view','create','update','delete'],
+                    'rules' => [
+                        [
+                            'allow' => true,
+                            'actions' => ['index','view','create','update','delete'],
+                            'roles' => ['@'],
+                        ],
+                    ],
+                ],
                 'verbs' => [
                     'class' => VerbFilter::class,
                     'actions' => [

@@ -45,4 +45,16 @@ class ProductHelper
         }
         return $html;
     }
+
+    /**
+     * @param int $id
+     * @return array
+     */
+    public static function getProductPath(int $id) : array {
+        $productPath = Yii::getAlias('@product');
+        return [
+            'root' => "$productPath/$id",
+            'thumb' => "$productPath/$id/thumb"
+        ];
+    }
 }

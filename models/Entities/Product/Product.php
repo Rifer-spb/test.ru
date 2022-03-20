@@ -2,6 +2,8 @@
 
 namespace app\models\Entities\Product;
 
+use yii\db\ActiveQuery;
+
 /**
  * This is the model class for table "product".
  *
@@ -72,5 +74,12 @@ class Product extends \yii\db\ActiveRecord
      */
     public function publish(int $publish) : void {
         $this->publish = $publish;
+    }
+
+    /**
+     * @return ActiveQuery
+     */
+    public function getCatCross() : ActiveQuery {
+        return $this->hasMany(ProductCatCross::class,['product' => 'id']);
     }
 }
