@@ -19,7 +19,7 @@ class UpdateForm extends Model
      */
     public function rules() : array {
         return [
-            [['name','price','cats'],'required','message' => 'Поле обязательно к заполнению'],
+            [['name','price'],'required','message' => 'Поле обязательно к заполнению'],
             [['price','id'], 'integer'],
             [['publish'], 'integer', 'max' => 1],
             [['name'], 'string', 'max' => 255],
@@ -48,15 +48,17 @@ class UpdateForm extends Model
      */
     public function catsValidate($attribute, $params) {
         if (!$this->hasErrors()) {
-            if (!is_array($this->cats) || count($this->cats)==0) {
+            if (!is_array($this->cats)) {
                 $this->addError($attribute, 'Cat error.');
             }
-            foreach ($this->cats as $cat) {
-                $exist = Cat::find()->where([
-                    'id' => $cat,
-                ])->exists();
-                if(!$exist) {
-                    $this->addError($attribute, 'Cat error.');
+            if(count($this->cats)>0) {
+                foreach ($this->cats as $cat) {
+                    $exist = Cat::find()->where([
+                        'id' => $cat,
+                    ])->exists();
+                    if(!$exist) {
+                        $this->addError($attribute, 'Cat error.');
+                    }
                 }
             }
         }

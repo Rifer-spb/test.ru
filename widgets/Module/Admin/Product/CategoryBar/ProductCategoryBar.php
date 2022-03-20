@@ -20,7 +20,6 @@ class ProductCategoryBar extends Widget
 
     public function init()
     {
-        ProductCategoryBarAssets::register( $this->getView() );
         parent::init();
         if(!$this->id) {
             throw new \InvalidArgumentException('ID param not found.');
@@ -28,21 +27,11 @@ class ProductCategoryBar extends Widget
     }
 
     /**
-     * @return string|null
+     * @return string
      */
-    public function run() : ?string {
-        $cats = $this->cats->findCatsByProduct($this->id);
-        if(count($cats)>0) {
-            $html = "<div class='product-category-bar'>";
-                $width = 100/count($cats);
-                foreach ($cats as $cat) {
-                    $html .='<div style="background-color:'.$cat['color'].';width:'.$width.'%">';
-                        $html .=$cat['name'];
-                    $html .='</div>';
-                }
-            $html .="</div>";
-            return $html;
-        }
-        return null;
+    public function run() : string {
+        return $this->render('index',[
+            'cats' => $this->cats->findCatsByProduct($this->id)
+        ]);
     }
 }

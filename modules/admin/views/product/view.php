@@ -27,7 +27,13 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
         ]) ?>
     </p>
-    <?= ProductCategoryBar::widget(['id' => $model->id]) ?>
+    <?php
+        if ($this->beginCache("product-category-bar-$model->id",['duration' => 60])) {
+            print ProductCategoryBar::widget(['id' => $model->id]);
+            $this->endCache();
+        }
+    ?>
+
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [

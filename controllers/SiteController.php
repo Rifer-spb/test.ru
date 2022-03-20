@@ -3,6 +3,7 @@
 namespace app\controllers;
 
 use Yii;
+use yii\web\NotFoundHttpException;
 use yii\web\Response;
 use yii\web\Controller;
 use app\models\LoginForm;
@@ -10,9 +11,19 @@ use app\models\ContactForm;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use app\models\Forms\Home\SearchForm;
+use app\models\Entities\Product\Product;
+use app\models\ReadModels\Cat\CatReadRepository;
 
 class SiteController extends Controller
 {
+    private $cats;
+
+    public function __construct($id, $module, CatReadRepository $cats, $config = [])
+    {
+        $this->cats = $cats;
+        parent::__construct($id, $module, $config);
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -62,9 +73,19 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        $form = new SearchForm();
+        $model = new SearchForm();
+        $model->load($this->request->get());
         return $this->render('index',[
-            'products' => $form->search()
+            'model' => $model,
+            'cats' => $this->cats->findAll(),
+            'products' => $model->search(),
+        ]);
+    }
+
+    public function actionView($id) {
+        $product = $this->findModel($id);
+        return $this->render('view',[
+            'product' => $product
         ]);
     }
 
@@ -129,4 +150,17 @@ class SiteController extends Controller
     {
         return $this->render('about');
     }
+
+    /**
+     * @param $id
+     * @return Product|null
+     * @throws NotFoundHttpException
+     */
+    protected function findModel($id) {
+        if (!$model = Product::findOne($id)) {
+            throw new NotFoundHttpException('The requested page does not exist.');
+        }
+        return $model;
+    }
+
 }

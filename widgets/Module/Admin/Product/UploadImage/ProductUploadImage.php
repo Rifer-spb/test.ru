@@ -19,7 +19,6 @@ class ProductUploadImage extends Widget
 
     public function init()
     {
-        ProductUploadImageAssets::register( $this->getView() );
         parent::init();
         if(!$this->id) {
             throw new \InvalidArgumentException('ID param not found.');
@@ -27,34 +26,12 @@ class ProductUploadImage extends Widget
     }
 
     /**
-     * @return string|null
+     * @return string
      */
-    public function run() : ?string {
-        $html = "<div class='product-upload-image'>";
-            $html .="<label>Загрузка изображений</label>";
-            $html .="<div class='row'>";
-                $html .="<div class='col-sm-4'>";
-                    $html .="<div class='action'>";
-                        $html .="<button class='btn btn-primary'>Загрузить изображение (1мб)</button>";
-                        $html .="<input type='file' multiple data-id='$this->id'>";
-                    $html .="</div>";
-                    $html .="<div class='progress'>";
-                        $html .="<div class='progress-bar-warning progress-bar' role='progressbar' aria-valuenow='70' aria-valuemin='0' aria-valuemax='100' style='width: 0;'></div>";
-                    $html .="</div>";
-                    $html .="<p class='error'></p>";
-                $html .="</div>";
-                $html .="<div class='col-sm-8'>";
-                    $images = $this->images->findAllByProduct($this->id);
-                    if(count($images)>0) {
-                        $html .="<div class='image-list'>";
-                            $html .= ProductHelper::getImagesListHtml($images);
-                        $html .="</div>";
-                    } else {
-                        $html .="<div class='image-list'>Изображений не найдено</div>";
-                    }
-                $html .="</div>";
-            $html .="</div>";
-        $html .="</div>";
-        return $html;
+    public function run() : string {
+        return $this->render('index',[
+            'id' => $this->id,
+            'images' => $this->images->findAllByProduct($this->id)
+        ]);
     }
 }

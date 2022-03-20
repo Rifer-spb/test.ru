@@ -15,6 +15,23 @@ class SearchForm extends Model
     public $cat;
     public $sort;
 
+    public function rules()
+    {
+        return [
+            ['cat','integer'],
+            ['cat','exist','targetClass' => Cat::class,'targetAttribute' => ['cat' => 'id']],
+            ['sort','integer', 'max' => 1],
+        ];
+    }
+
+    public function attributeLabels()
+    {
+        return [
+            'cat' => 'Категория',
+            'sort' => 'Сортировка'
+        ];
+    }
+
     /**
      * @return array
      */
@@ -67,12 +84,10 @@ class SearchForm extends Model
                     $imagePath = Url::to('@web/'.$productPath['thumb'].'/'.$imageFile);
                     $image = [
                         'id' => $productImage['id'],
-                        'image' => $imagePath
+                        'src' => $imagePath
                     ];
                 }
-                $products[$key]['image'] = [
-                    'id' => $image
-                ];
+                $products[$key]['image'] = $image;
             }
         }
         return $products;

@@ -19,7 +19,7 @@ class ProductCatCrossRepository
      * @param array $where
      */
     public function deleteAllBy(array $where) : void {
-        ProductCatCross::deleteAll();
+        ProductCatCross::deleteAll($where);
     }
 
     /**

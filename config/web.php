@@ -11,15 +11,17 @@ $config = [
     'aliases' => [
         '@bower' => '@vendor/bower-asset',
         '@npm'   => '@vendor/npm-asset',
-        '@product' => 'upload/product',
+        '@product' => 'upload/product'
     ],
     'components' => [
         'request' => [
+            'baseUrl' => '',
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             'cookieValidationKey' => 'eWhBnn43mFEMCPb_AirIrRYyn9ho44YW',
         ],
         'cache' => [
             'class' => 'yii\caching\FileCache',
+            'cachePath' => '@app/runtime/cache'
         ],
         'user' => [
             'identityClass' => 'app\models\User',

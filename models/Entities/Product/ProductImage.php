@@ -29,7 +29,6 @@ class ProductImage extends \yii\db\ActiveRecord
      * @param string $extension
      * @param string $server_name
      * @param int $size
-     * @param int $default
      * @return ProductImage
      */
     public static function create(int $product, string $name, string $extension, string $server_name, int $size) : self {

@@ -82,4 +82,18 @@ class Product extends \yii\db\ActiveRecord
     public function getCatCross() : ActiveQuery {
         return $this->hasMany(ProductCatCross::class,['product' => 'id']);
     }
+
+    /**
+     * @return ActiveQuery
+     */
+    public function getImages() : ActiveQuery {
+        return $this->hasMany(ProductImage::class,['product' => 'id']);
+    }
+
+    /**
+     * @return ActiveQuery
+     */
+    public function getImageDefault() : ActiveQuery {
+        return $this->hasOne(ProductImage::class,['product' => 'id'])->onCondition(['default' => 1]);
+    }
 }

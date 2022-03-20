@@ -51,7 +51,7 @@ class UploadImageService
             throw new \DomainException('File save error.');
         }
         Image::resize($filePath, 600, 800)->save($filePath, ['quality' => 80]);
-        Image::resize($filePath, 200, 200)->save($fileThumbPath, ['quality' => 80]);
+        Image::crop($filePath, 200, 200)->save($fileThumbPath, ['quality' => 80]);
         $this->repository->save($image);
     }
 

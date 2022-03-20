@@ -39,4 +39,11 @@ class ProductCatCross extends \yii\db\ActiveRecord
     public function getCat() : ActiveQuery {
         return $this->hasOne(Cat::class,['id' => 'cat']);
     }
+
+    /**
+     * @return ActiveQuery
+     */
+    public function getCatItem() : ActiveQuery {
+        return $this->hasOne(Cat::class,['id' => 'cat']);
+    }
 }

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "aa6fba81cee8db83008b490b83986e4b",
+    "content-hash": "8c37355c99ef0259bdbab7c7848d8d8b",
     "packages": [
         {
             "name": "bower-asset/inputmask",
@@ -536,6 +536,52 @@
                 "source": "https://github.com/paragonie/random_compat"
             },
             "time": "2020-10-15T08:29:30+00:00"
+        },
+        {
+            "name": "powerkernel/yii2-photoswipe",
+            "version": "1.1.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/powerkernel/yii2-photoswipe.git",
+                "reference": "901c0269bf2ff5728907ceadf3a619d78cfd2ad1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/powerkernel/yii2-photoswipe/zipball/901c0269bf2ff5728907ceadf3a619d78cfd2ad1",
+                "reference": "901c0269bf2ff5728907ceadf3a619d78cfd2ad1",
+                "shasum": ""
+            },
+            "require": {
+                "bower-asset/photoswipe": "~4.1.0",
+                "yiisoft/yii2": "~2.0.0"
+            },
+            "type": "yii2-extension",
+            "autoload": {
+                "psr-4": {
+                    "powerkernel\\photoswipe\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Harry Tang",
+                    "email": "harry@powerkernel.com"
+                }
+            ],
+            "description": "PhotoSwipe extension for Yii2",
+            "keywords": [
+                "extension",
+                "photoswipe",
+                "yii2"
+            ],
+            "support": {
+                "issues": "https://github.com/powerkernel/yii2-photoswipe/issues",
+                "source": "https://github.com/powerkernel/yii2-photoswipe/tree/master"
+            },
+            "time": "2017-12-01T14:03:32+00:00"
         },
         {
             "name": "swiftmailer/swiftmailer",
@@ -5387,8 +5433,8 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "php": ">=5.6.0"
+        "php": ">=7.0"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.1.0"
+    "plugin-api-version": "2.2.0"
 }

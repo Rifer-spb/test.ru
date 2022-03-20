@@ -56,23 +56,29 @@ class ProductService
             $form->publish
         );
         $this->products->save($product);
-        $this->productCatCross->deleteAllBy([
-            'AND',
-            ['product' => $product->id],
-            ['NOT IN','cat',$form->cats]
-        ]);
-        foreach ($form->cats as $cat) {
-            $exist = $this->productCatCross->existByCatAndProduct(
-                $cat,
-                $product->id
-            );
-            if(!$exist) {
-                $cross = ProductCatCross::create(
+        if(!empty($form->cats) and count($form->cats)>0) {
+            $this->productCatCross->deleteAllBy([
+                'AND',
+                ['product' => $product->id],
+                ['NOT IN','cat',$form->cats]
+            ]);
+            foreach ($form->cats as $cat) {
+                $exist = $this->productCatCross->existByCatAndProduct(
                     $cat,
                     $product->id
                 );
-                $this->productCatCross->save($cross);
+                if(!$exist) {
+                    $cross = ProductCatCross::create(
+                        $cat,
+                        $product->id
+                    );
+                    $this->productCatCross->save($cross);
+                }
             }
+        } else {
+            $this->productCatCross->deleteAllBy([
+                'product' => $product->id
+            ]);
         }
     }
 }
