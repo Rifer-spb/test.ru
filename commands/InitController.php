@@ -28,13 +28,24 @@ class InitController extends Controller
      */
     public function actionIndex()
     {
-        $dbFolderPath = __DIR__.'/../db';
-        echo "Creating DB folder with 0777...\n";
+        $dbName = "test.db";
+        $dbFolderPath = dirname(__DIR__).'/db';
+        $dbPath = "$dbFolderPath/$dbName";
+        if(file_exists($dbPath)) {
+            echo "DB $dbName already exists\n";
+            exit;
+        }
+        echo "Creating DB $dbName...\n";
         if(FileHelper::createDirectory($dbFolderPath,0777)===false) {
             echo "ERROR: DB folder is not created!\n";
-            exit();
+            exit;
         }
-        echo "DB folder was created successfully!\n";
+        new \SQLite3($dbPath);
+        if(!file_exists($dbPath)) {
+            echo "ERROR: DB $dbName is not created!\n";
+            exit;
+        }
+        echo "DB $dbName was created successfully!\n";
         return ExitCode::OK;
     }
 }
