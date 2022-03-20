@@ -16,10 +16,10 @@ class ProductHelper
         if(count($images)>0) {
             $productPath = Yii::getAlias('@product');
             foreach ($images as $key=>$image) {
-                $default = $image['default'];
-                $imageID = $image['id'];
-                $productID = $image['product'];
-                $file = $image['server_name'].'.'.$image['extension'];
+                $default = $image->default;
+                $imageID = $image->id;
+                $productID = $image->product;
+                $file = $image->server_name.'.'.$image->extension;
                 $image = "$productPath/$productID/thumb/$file";
                 $html .="<div class='image-item' data-id='$imageID'>";
                     $html .="<div class='image-item-top'>";

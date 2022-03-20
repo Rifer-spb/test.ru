@@ -14,7 +14,6 @@ class ProductCatCrossReadRepository
         return ProductCatCross::find()
             ->select('cat')
             ->where(['product' => $id])
-            ->asArray()
             ->column();
     }
 }

@@ -13,6 +13,6 @@ class ProductImageReadRepository
     public function findAllByProduct(int $id) : array {
         return ProductImage::find()->where([
             'product' => $id
-        ])->asArray()->all();
+        ])->all();
     }
 }
