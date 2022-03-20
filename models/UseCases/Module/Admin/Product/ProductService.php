@@ -34,12 +34,14 @@ class ProductService
             $form->publish
         );
         $this->products->save($product);
-        foreach ($form->cats as $cat) {
-            $cross = ProductCatCross::create(
-                $cat,
-                $product->id
-            );
-            $this->productCatCross->save($cross);
+        if(!empty($form->cats) and count($form->cats)>0) {
+            foreach ($form->cats as $cat) {
+                $cross = ProductCatCross::create(
+                    $cat,
+                    $product->id
+                );
+                $this->productCatCross->save($cross);
+            }
         }
         return $product->id;
     }
@@ -48,7 +50,7 @@ class ProductService
      * @param Product $product
      * @param UpdateForm $form
      */
-    public function edit(Product $product, UpdateForm $form) : void {
+    public function edit(Product $product, UpdateForm $form) {
         $product->edit(
             $form->name,
             $form->desc,

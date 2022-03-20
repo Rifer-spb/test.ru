@@ -18,7 +18,7 @@ class CreateForm extends Model
      */
     public function rules() : array {
         return [
-            [['name','price','cats'],'required','message' => 'Поле обязательно к заполнению'],
+            [['name','price'],'required','message' => 'Поле обязательно к заполнению'],
             [['price'], 'integer'],
             [['publish'], 'integer', 'max' => 1],
             [['name'], 'string', 'max' => 255],
@@ -47,15 +47,14 @@ class CreateForm extends Model
      */
     public function catsValidate($attribute, $params) {
         if (!$this->hasErrors()) {
-            if (!is_array($this->cats) || count($this->cats)==0) {
-                $this->addError($attribute, 'Cat error.');
-            }
-            foreach ($this->cats as $cat) {
-                $exist = Cat::find()->where([
-                    'id' => $cat,
-                ])->exists();
-                if(!$exist) {
-                    $this->addError($attribute, 'Cat error.');
+            if(!empty($this->cats) and count($this->cats)>0) {
+                foreach ($this->cats as $cat) {
+                    $exist = Cat::find()->where([
+                        'id' => $cat,
+                    ])->exists();
+                    if(!$exist) {
+                        $this->addError($attribute, 'Cat error.');
+                    }
                 }
             }
         }

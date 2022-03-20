@@ -77,6 +77,7 @@ $this->registerCss($css, ["type" => "text/css"]);
  ?>
 <div class="site-index">
     <h1><?=$this->title?></h1>
+    <?php if(count($products)>0) { ?>
     <div class="filter">
         <?php $form = ActiveForm::begin([
             'method' => 'GET',
@@ -137,4 +138,11 @@ $this->registerCss($css, ["type" => "text/css"]);
             <?php } ?>
         </div>
     </div>
+    <?php } else { ?>
+        <div class="row">
+            <div class="col-sm-12">
+                <p>Товаров не найдено</p>
+            </div>
+        </div>
+    <?php } ?>
 </div>

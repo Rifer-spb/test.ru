@@ -48,21 +48,23 @@ $this->registerCss($css, ["type" => "text/css"], "myStyles" );
         ],
     ]); ?>
 
-    <?= $form->field($model, 'cats')->checkboxList(
-        ArrayHelper::map($cats,'id','name'), [
-         'item' => function ($index, $label, $name, $checked, $value) {
-            $cat = Cat::findOne($value);
-            $html = "<label>";
-                $html .="<input type='checkbox' name='$name' value='$value'";
-                if($checked) {
-                    $html .="checked";
-                }
-                $html .="/>$label";
-                $html .="<span style='background-color: $cat->color;'>&nbsp;</span>";
-            $html .="</label>";
-            return $html;
-        }]
-    ) ?>
+    <?php if(count($cats)>0) { ?>
+        <?= $form->field($model, 'cats')->checkboxList(
+            ArrayHelper::map($cats,'id','name'), [
+             'item' => function ($index, $label, $name, $checked, $value) {
+                $cat = Cat::findOne($value);
+                $html = "<label>";
+                    $html .="<input type='checkbox' name='$name' value='$value'";
+                    if($checked) {
+                        $html .="checked";
+                    }
+                    $html .="/>$label";
+                    $html .="<span style='background-color: $cat->color;'>&nbsp;</span>";
+                $html .="</label>";
+                return $html;
+            }]
+        ) ?>
+    <?php } ?>
 
     <?=$form->field($model, 'publish')->checkbox([
         'value' => Product::STATUS_PUBLISH_ON
