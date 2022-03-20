@@ -1,6 +1,6 @@
 <?php
 
-namespace app\widgets\Product;
+namespace app\widgets\Module\Admin\Product\CategoryBar;
 
 use yii\web\AssetBundle;
 
@@ -8,6 +8,6 @@ class ProductCategoryBarAssets extends AssetBundle
 {
     public $baseUrl = '@web';
     public $css = [
-        'widgets/product/category-bar/style.css',
+        'widgets/module/admin/product/category-bar/style.css',
     ];
 }

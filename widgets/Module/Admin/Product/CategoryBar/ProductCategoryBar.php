@@ -1,6 +1,6 @@
 <?php
 
-namespace app\widgets\Product;
+namespace app\widgets\Module\Admin\Product\CategoryBar;
 
 use yii\base\Widget;
 use app\models\ReadModels\Cat\CatReadRepository;

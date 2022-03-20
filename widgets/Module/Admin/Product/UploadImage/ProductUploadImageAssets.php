@@ -1,6 +1,6 @@
 <?php
 
-namespace app\widgets\Module\Admin\Product;
+namespace app\widgets\Module\Admin\Product\UploadImage;
 
 use yii\web\AssetBundle;
 

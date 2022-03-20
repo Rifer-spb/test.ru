@@ -2,8 +2,8 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
-use app\widgets\Product\ProductCategoryBar;
-use app\widgets\Module\Admin\Product\ProductUploadImage;
+use app\widgets\Module\Admin\Product\CategoryBar\ProductCategoryBar;
+use app\widgets\Module\Admin\Product\UploadImage\ProductUploadImage;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Entities\Product\Product */
