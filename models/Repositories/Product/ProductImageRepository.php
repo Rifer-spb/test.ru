@@ -43,4 +43,21 @@ class ProductImageRepository
         ProductImage::updateAll($fields,$where);
     }
 
+    /**
+     * @param array $where
+     */
+    public function deleteAll(array $where) : void {
+        ProductImage::deleteAll($where);
+    }
+
+    /**
+     * @param int $id
+     * @return array
+     */
+    public function findAllByProduct(int $id) : array {
+        return ProductImage::find()->where([
+            'product' => $id
+        ])->all();
+    }
+
 }

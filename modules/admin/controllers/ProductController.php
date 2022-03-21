@@ -143,11 +143,14 @@ class ProductController extends Controller
      * @throws NotFoundHttpException
      * @throws \yii\db\StaleObjectException
      */
-    public function actionDelete($id)
-    {
-        $this->findModel($id)->delete();
-
-        return $this->redirect(['index']);
+    public function actionDelete($id) {
+        $product = $this->findModel($id);
+        try {
+            $this->service->delete($product);
+            return $this->redirect(['index']);
+        } catch (\DomainException $e) {
+            print $e->getMessage();
+        }
     }
 
     /**

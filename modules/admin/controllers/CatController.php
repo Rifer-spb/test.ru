@@ -128,8 +128,13 @@ class CatController extends Controller
      * @throws StaleObjectException
      */
     public function actionDelete($id) {
-        $this->findModel($id)->delete();
-        return $this->redirect(['index']);
+        $cat = $this->findModel($id);
+        try {
+            $this->service->delete($cat);
+            return $this->redirect(['index']);
+        } catch (\DomainException $e) {
+            print $e->getMessage();
+        }
     }
 
     /**

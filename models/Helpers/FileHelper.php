@@ -32,4 +32,18 @@ class FileHelper
     public static function getBase64FromImage(string $image) : string {
         return base64_encode(file_get_contents($image));
     }
+
+    /**
+     * @param $path
+     * @return bool
+     */
+    public static function rmRec($path) {
+        if (is_file($path)) return unlink($path);
+        if (is_dir($path)) {
+            foreach(scandir($path) as $p) if (($p!='.') && ($p!='..'))
+                self::rmRec($path.DIRECTORY_SEPARATOR.$p);
+            return rmdir($path);
+        }
+        return false;
+    }
 }

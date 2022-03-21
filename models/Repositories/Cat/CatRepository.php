@@ -14,4 +14,14 @@ class CatRepository
             throw new \RuntimeException('Saving error.');
         }
     }
+
+    /**
+     * @param Cat $model
+     * @throws \yii\db\StaleObjectException
+     */
+    public function delete(Cat $model) : void {
+        if(!$model->delete()) {
+            throw new \RuntimeException('Delete error.');
+        }
+    }
 }

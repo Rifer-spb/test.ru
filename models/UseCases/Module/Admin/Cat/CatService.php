@@ -3,21 +3,23 @@
 namespace app\models\UseCases\Module\Admin\Cat;
 
 use app\models\Entities\Cat\Cat;
-use app\models\Forms\Module\Admin\Cat\UpdateForm;
 use app\models\Repositories\Cat\CatRepository;
+use app\models\Forms\Module\Admin\Cat\UpdateForm;
 use app\models\Forms\Module\Admin\Cat\CreateForm;
+use app\models\Repositories\Product\ProductCatCrossRepository;
 
 class CatService
 {
     private $repository;
+    private $productCats;
 
-    /**
-     * CatService constructor.
-     * @param CatRepository $repository
-     */
-    public function __construct(CatRepository $repository)
-    {
+
+    public function __construct(
+        CatRepository $repository,
+        ProductCatCrossRepository $productCats
+    ) {
         $this->repository = $repository;
+        $this->productCats = $productCats;
     }
 
     /**
@@ -43,5 +45,16 @@ class CatService
             $form->color
         );
         $this->repository->save($model);
+    }
+
+    /**
+     * @param Cat $model
+     * @throws \yii\db\StaleObjectException
+     */
+    public function delete(Cat $model) : void {
+        $this->productCats->deleteAllBy([
+            'cat' => $model->id
+        ]);
+        $this->repository->delete($model);
     }
 }
