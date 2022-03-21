@@ -13,7 +13,9 @@ use yii\bootstrap4\ActiveForm;
 $this->title = 'Витрина';
 
 $css = <<< CSS
-
+.products .col-sm-4 {
+    margin-bottom: 20px;
+}
 .product {
     border: 1px solid #cccccc;
     padding: 15px;
