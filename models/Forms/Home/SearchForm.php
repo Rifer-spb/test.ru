@@ -28,7 +28,7 @@ class SearchForm extends Model
     {
         return [
             'cat' => 'Категория',
-            'sort' => 'Сортировка'
+            'sort' => 'Сортировка цены'
         ];
     }
 
@@ -44,9 +44,9 @@ class SearchForm extends Model
             $query->andWhere(['c.cat' => $this->cat]);
         }
         if($this->sort) {
-            $query->orderBy('p.id DESC');
+            $query->orderBy('p.price DESC');
         } else {
-            $query->orderBy('p.id ASC');
+            $query->orderBy('p.price ASC');
         }
         $query->asArray();
         $queryProducts = $query->all();

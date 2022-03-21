@@ -88,7 +88,7 @@ $this->registerCss($css, ["type" => "text/css"]);
         <div class="row">
             <div class="col-sm-6">
                 <?= $form->field($model, 'sort')->dropDownList([
-                    0 => 'По умолчанию',
+                    0 => 'По возрастанию',
                     1 => 'По убыванию'
                 ], [
                     'onchange' => 'this.form.submit()'
