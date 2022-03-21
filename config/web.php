@@ -11,7 +11,8 @@ $config = [
     'aliases' => [
         '@bower' => '@vendor/bower-asset',
         '@npm'   => '@vendor/npm-asset',
-        '@product' => 'upload/product'
+        '@product' => 'upload/product',
+        '@mihaildev/ckeditor' => '@vendor/mihaildev/yii2-ckeditor'
     ],
     'components' => [
         'request' => [
