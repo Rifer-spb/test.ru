@@ -12,8 +12,8 @@ document.querySelector('.product-upload-image input[type=file]').addEventListene
         imageList = parent.querySelector('.image-list'),
         file = files[0];
     if(file.size>1048576) {
-        //error.innerHTML = 'Максимально допустимы размер 1мб';
-        //return;
+        error.innerHTML = 'Максимально допустимы размер 1мб';
+        return;
     }
     progress.style.opacity = 1;
     e.preventDefault();
