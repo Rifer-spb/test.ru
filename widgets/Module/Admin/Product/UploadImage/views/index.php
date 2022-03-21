@@ -15,8 +15,11 @@ use app\models\Helpers\ProductHelper;
                 <button class='btn btn-primary'>Загрузить изображение (1мб)</button>
                 <input type='file' multiple data-id='<?=$id?>'>
             </div>
-            <div class='progress'>
-                <div class='progress-bar-warning progress-bar' role='progressbar' aria-valuenow='70' aria-valuemin='0' aria-valuemax='100' style='width: 0;'></div>
+            <div class="progress-wrap">
+                <div class='progress'>
+                    <div class='progress-bar-warning progress-bar' role='progressbar' aria-valuenow='70' aria-valuemin='0' aria-valuemax='100' style='width: 0;'></div>
+                </div>
+                <a class="abort" href="#">x</a>
             </div>
             <p class='error'></p>
         </div>

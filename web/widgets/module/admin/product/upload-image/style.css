@@ -19,10 +19,22 @@
     margin: 0;
 }
 
-.product-upload-image .progress {
+.product-upload-image .progress-wrap {
+    position: relative;
     width: 100%;
     max-width: 244px;
     opacity: 0;
+}
+
+.product-upload-image .progress-wrap .abort {
+    position: absolute;
+    top: -1px;
+    right: -12px;
+    display: inline-block;
+    text-decoration: none;
+    font-size: 17px;
+    font-weight: 500;
+    line-height: 17px;
 }
 
 .product-upload-image .image-list>div {
