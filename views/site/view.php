@@ -84,7 +84,8 @@ $publicPath = ProductHelper::getProductPath(
                         $items[] = [
                             'image' => $file,
                             'thumb' => $thumb,
-                            'size' => $size[0].'x'.$size[1]
+                            'size' => $size[0].'x'.$size[1],
+                            'title' => ''
                         ];
                     }
                     ?>
