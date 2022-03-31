@@ -1,5 +1,5 @@
+const productImageUrl = '/admin/widgets/product/upload-image';
 document.querySelector('.product-upload-image input[type=file]').addEventListener('change', e => {
-    const productImageUrl = '/admin/widgets/product/upload-image';
     const files = e.target.files || e.dataTransfer.files;
     if (!files.length) {
         return;
@@ -35,7 +35,7 @@ document.querySelector('.product-upload-image input[type=file]').addEventListene
             if(!data.error) {
                 imageList.innerHTML = data.html;
                 progress.querySelector('.progress-bar').style.width = '0';
-                productImageActions();
+                productImageItemActions();
             } else {
                 const e = data.error;
                 error.innerHTML = e['uploadform-file'][0];
@@ -59,7 +59,6 @@ document.querySelector('.product-upload-image .abort').addEventListener('click',
 });
 
 function productImageItemActions() {
-    const productImageUrl = '/admin/widgets/product/upload-image';
     document.querySelectorAll('.product-upload-image .image-item').forEach(el => {
         el.querySelector('.delete>a').addEventListener('click', e => {
             e.preventDefault();
