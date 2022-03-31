@@ -1,4 +1,4 @@
-const productImageUrl = '/admin/widgets/product/upload-image';
+var productImageUrl = '/admin/widgets/product/upload-image';
 document.querySelector('.product-upload-image input[type=file]').addEventListener('change', e => {
     const files = e.target.files || e.dataTransfer.files;
     if (!files.length) {
