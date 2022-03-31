@@ -71,7 +71,7 @@ function productImageItemActions() {
                 const data = xhr.response;
                 if(data) {
                     imageList.innerHTML = data.html;
-                    productImageActions();
+                    productImageItemActions();
                 }
             };
             xhr.responseType = 'json';
@@ -88,7 +88,7 @@ function productImageItemActions() {
                 const data = xhr.response;
                 if(data) {
                     imageList.innerHTML = data.html;
-                    productImageActions();
+                    productImageItemActions();
                 }
             };
             xhr.responseType = 'json';
