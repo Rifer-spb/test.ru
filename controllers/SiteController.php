@@ -24,9 +24,6 @@ class SiteController extends Controller
         parent::__construct($id, $module, $config);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function behaviors()
     {
         return [
