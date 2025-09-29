@@ -73,6 +73,11 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
+
+
+
+
+
         $model = new SearchForm();
         $model->load($this->request->get());
         return $this->render('index',[
