@@ -80,6 +80,19 @@ class SiteController extends Controller
             'cats' => $this->cats->findAll(),
             'products' => $model->search(),
         ]);
+
+
+
+
+
+
+
+
+
+
+
+
+
     }
 
     public function actionView($id) {
